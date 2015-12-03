@@ -1,0 +1,16 @@
+{
+  "name": "@radioactivehamster/effigy.cards",
+  "version": "0.0.0",
+  "description": "Polymorphic vCard representations",
+  "main": "gulpfile.babel.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "James Benner <james.benner@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "jade": "^1.11.0",
+    "less": "^2.5.3",
+    "semantic-ui": "^2.1.6"
+  }
+}

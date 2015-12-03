@@ -1,2 +1,2 @@
 # effigy.cards
-Polymorphic vCard representations (at some point eventually)
+> Polymorphic vCard representations (at some point eventually)
