@@ -1,0 +1,4 @@
+mixin text-input(label, name)
+    unless name
+        - name = label.toLowerCase().replace(' ', '-')
+    label #{label} #[input(type='text', name=name, placeholder=name)]
