@@ -97,5 +97,13 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Card extends Model
 {
-    //
+    /**
+     * Get the adr for the card.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function adr()
+    {
+        return $this->hasOne('App\Adr');
+    }
 }
