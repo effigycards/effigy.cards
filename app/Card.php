@@ -85,7 +85,7 @@ class Card extends Model
      */
     public function adr()
     {
-        // All three of these are required with `::hasOne()` for some reason...
+        // All three of these args are required with `::hasOne()` for some reason...
         return $this->hasOne(Adr::class, 'id', 'adr_id');
     }
 }
