@@ -22,17 +22,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $url
  * @property string $uid
  * @property string $category
- * @property string $post_office_box
- * @property string $extended_address
- * @property string $street_address
- * @property string $locality
- * @property string $region
- * @property string $postal_code
- * @property string $country_name
- * @property string $label
- * @property string $latitude
- * @property string $longitude
- * @property string $altitude
  * @property string $tel
  * @property string $note
  * @property string $bday
@@ -50,6 +39,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $rev
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property integer $adr_id
+ * @property-read \App\Adr $adr
  * @method static \Illuminate\Database\Query\Builder|\App\Card whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Card whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Card whereHonorificPrefix($value)
@@ -65,17 +56,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Card whereUrl($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Card whereUid($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Card whereCategory($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Card wherePostOfficeBox($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Card whereExtendedAddress($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Card whereStreetAddress($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Card whereLocality($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Card whereRegion($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Card wherePostalCode($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Card whereCountryName($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Card whereLabel($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Card whereLatitude($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Card whereLongitude($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Card whereAltitude($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Card whereTel($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Card whereNote($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Card whereBday($value)
@@ -93,6 +73,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Card whereRev($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Card whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Card whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Card whereAdrId($value)
  * @mixin \Eloquent
  */
 class Card extends Model
@@ -104,6 +85,7 @@ class Card extends Model
      */
     public function adr()
     {
-        return $this->hasOne('App\Adr');
+        // All three of these are required with `::hasOne()` for some reason...
+        return $this->hasOne(Adr::class, 'id', 'adr_id');
     }
 }

@@ -30,7 +30,6 @@ class CreateCardsTable extends Migration
             $table->string('url')->nullable();
             $table->string('uid')->nullable();
             $table->string('category')->nullable();
-            # $table->string('adr');
             # $table->string('geo');
             $table->string('tel')->nullable();
             $table->string('note')->nullable();

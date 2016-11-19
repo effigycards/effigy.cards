@@ -33,13 +33,5 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Adr extends Model
 {
-    /**
-     * Get the card associated with the adr.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function card()
-    {
-        return $this->belongsTo('App\Card');
-    }
+
 }
