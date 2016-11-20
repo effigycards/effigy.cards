@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Card;
+use App\Transformers\CardTransformer;
 use Illuminate\Http\Request;
 
 class CardController extends Controller
@@ -13,7 +15,7 @@ class CardController extends Controller
      */
     public function index()
     {
-        //
+        return response(Card::all());
     }
 
     /**
@@ -40,12 +42,19 @@ class CardController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param  Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, int $id)
     {
-        //
+        $card = Card::find($id);
+        $transformed = new CardTransformer($card);
+
+        dd($transformed->attributes);
+
+        #dd($request);
+        return response(Card::find($id));
     }
 
     /**
