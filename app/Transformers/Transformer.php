@@ -50,7 +50,7 @@ abstract class Transformer
     public function filterIsNotNull(array $attributes)
     {
         $class = static::class;
-
+        
         return array_filter($attributes, "${class}::isNotNull");
     }
 
