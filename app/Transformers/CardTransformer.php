@@ -2,9 +2,9 @@
 
 namespace App\Transformers;
 
-use App\Card;
+use App\{Adr,Card};
 
-class CardTransformer
+class CardTransformer extends Transformer
 {
     /**
      * Attributes that will not be in the transformation.
@@ -21,32 +21,58 @@ class CardTransformer
      */
     public function __construct(Card $card)
     {
-        $className                = self::class;
-        $notNullAttributes        = array_filter($card->getAttributes(), "${className}::isNotNull");
-        $notBlacklistedAttributes = array_filter($notNullAttributes, "${className}::isNotBlacklisted", ARRAY_FILTER_USE_KEY);
+        $notNullAttributes        = self::filterIsNotNull($card->getAttributes());
+        $notBlacklistedAttributes = self::filterIsNotBlacklisted($notNullAttributes);
+        $attributesWithAdr        = self::attachAdrIfExists($notBlacklistedAttributes);
+        $attributesWithoutAdrId   = self::detachAdrIdIfExists($attributesWithAdr);
 
-        $this->attributes = $notBlacklistedAttributes;
+        $this->attributes = $attributesWithoutAdrId;
     }
 
     /**
-     * Determine if an attribute name is not blacklisted.
-     *
-     * @param  string  $attribute
-     * @return bool
+     * @param  array  $attributes
+     * @return array
      */
-    public static function isNotBlacklisted(string $attribute): bool
+    public static function attachAdrIfExists(array $attributes): array
     {
-        return !in_array($attribute, self::$blacklist);
+
+        if (!array_key_exists('adr_id', $attributes) || !is_int($attributes['adr_id'])) {
+            return $attributes;
+        }
+
+        $adr         = Adr::find($attributes['adr_id']);
+        $transformed = new AdrTransformer($adr);
+
+        $attributes['adr'] = $transformed->getAttributes(); // $adr->toArray();
+
+        return $attributes;
     }
 
     /**
-     * Determine if a value is not null.
-     *
-     * @param  mixed  $value
-     * @return bool
+     * @param  array  $attributes
+     * @return array
      */
-    public static function isNotNull($value): bool
+    public static function detachAdrIdIfExists(array $attributes): array
     {
-        return $value !== null;
+        if (array_key_exists('adr_id', $attributes)) {
+            unset($attributes['adr_id']);
+        }
+
+        return $attributes;
+    }
+
+    /**
+     * @return object
+     */
+    public function objectify()
+    {
+        $attributes = $this->attributes;
+
+        if (array_key_exists('adr', $attributes)) {
+            # $attributes['adr'] = (object) $attributes['adr'];
+            $attributes['adr'] = (new Adr($attributes['adr']))->objectify();
+        }
+
+        return (object) $attributes;
     }
 }
