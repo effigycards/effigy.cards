@@ -48,13 +48,10 @@ class CardController extends Controller
      */
     public function show(Request $request, int $id)
     {
-        $card = Card::find($id);
+        $card        = Card::find($id);
         $transformed = new CardTransformer($card);
 
-        dd($transformed->attributes);
-
-        #dd($request);
-        return response(Card::find($id));
+        return response()->json($transformed->getAttributes());
     }
 
     /**
