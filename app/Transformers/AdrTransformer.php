@@ -11,7 +11,7 @@ class AdrTransformer extends Transformer
      *
      * @var string[]
      */
-    protected static $blacklist = ['created_at', 'updated_at', 'id'];
+    protected static $blacklist = ['created_at', 'id', 'updated_at'];
 
     /**
      * CardTransformer constructor.

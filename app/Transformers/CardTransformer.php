@@ -11,7 +11,7 @@ class CardTransformer extends Transformer
      *
      * @var string[]
      */
-    protected static $blacklist = ['created_at', 'updated_at', 'id'];
+    protected static $blacklist = ['created_at', 'id', 'updated_at'];
 
     /**
      * CardTransformer constructor.
@@ -25,8 +25,7 @@ class CardTransformer extends Transformer
         $notBlacklistedAttributes = self::filterIsNotBlacklisted($notNullAttributes);
         $attributesWithAdr        = self::attachAdrIfExists($notBlacklistedAttributes);
         $attributesWithoutAdrId   = self::detachAdrIdIfExists($attributesWithAdr);
-
-        $this->attributes = $attributesWithoutAdrId;
+        $this->attributes         = $attributesWithoutAdrId;
     }
 
     /**
@@ -40,10 +39,9 @@ class CardTransformer extends Transformer
             return $attributes;
         }
 
-        $adr         = Adr::find($attributes['adr_id']);
-        $transformed = new AdrTransformer($adr);
-
-        $attributes['adr'] = $transformed->getAttributes(); // $adr->toArray();
+        $adr               = Adr::find($attributes['adr_id']);
+        $transformed       = new AdrTransformer($adr);
+        $attributes['adr'] = $transformed->getAttributes();
 
         return $attributes;
     }
@@ -69,8 +67,7 @@ class CardTransformer extends Transformer
         $attributes = $this->attributes;
 
         if (array_key_exists('adr', $attributes)) {
-            # $attributes['adr'] = (object) $attributes['adr'];
-            $attributes['adr'] = (new Adr($attributes['adr']))->objectify();
+            $attributes['adr'] = (object) $attributes['adr'];
         }
 
         return (object) $attributes;
