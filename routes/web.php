@@ -19,4 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::resource('adrs', 'AdrController');
+
 Route::resource('cards', 'CardController');

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Adr;
+use App\Transformers\AdrTransformer;
 use Illuminate\Http\Request;
 
 class AdrController extends Controller
@@ -45,7 +47,10 @@ class AdrController extends Controller
      */
     public function show($id)
     {
-        //
+        $adr         = Adr::find($id);
+        $transformed = new AdrTransformer($adr);
+
+        return response()->json($transformed->getAttributes());
     }
 
     /**
