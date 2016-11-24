@@ -44,14 +44,27 @@ class CardController extends Controller
      *
      * @param  Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
     public function show(Request $request, int $id)
     {
-        $card        = Card::find($id);
-        $transformed = new CardTransformer($card);
+        if ($request->wantsJson()) {
+            return self::showJson($id);
+        }
 
-        return response()->json($transformed->getAttributes());
+        return view('pages.cards.show')->with('card', Card::find($id));
+    }
+
+    /**
+     * @param  int  $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    private static function showJson(int $id)
+    {
+        $transformed = CardTransformer::fromId($id);
+        $attributes  = $transformed->getAttributes();
+
+        return response()->json($attributes);
     }
 
     /**

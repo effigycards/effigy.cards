@@ -47,10 +47,10 @@ class AdrController extends Controller
      */
     public function show($id)
     {
-        $adr         = Adr::find($id);
-        $transformed = new AdrTransformer($adr);
+        $transformed = AdrTransformer::fromId($id);
+        $attributes  = $transformed->getAttributes();
 
-        return response()->json($transformed->getAttributes());
+        return response()->json($attributes);
     }
 
     /**
