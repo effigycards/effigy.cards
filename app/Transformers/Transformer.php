@@ -2,9 +2,14 @@
 
 namespace App\Transformers;
 
+use App\Transformers\Traits\{NotBlacklisted,NotNull};
+use Illuminate\Contracts\Support\Jsonable;
 
-abstract class Transformer
+abstract class Transformer implements Jsonable
 {
+    use NotBlacklisted;
+    use NotNull;
+
     /**
      * @var array
      */
@@ -29,30 +34,10 @@ abstract class Transformer
     }
 
     /**
-     * Get filtered non-blacklisted attributes.
-     *
-     * @param  array  $attributes
-     * @return array
+     * @param  int  $id
+     * @return static
      */
-    public function filterIsNotBlacklisted(array $attributes)
-    {
-        $class = static::class;
-
-        return array_filter($attributes, "${class}::isNotBlacklisted", ARRAY_FILTER_USE_KEY);
-    }
-
-    /**
-     * Get filtered non-null attributes.
-     *
-     * @param  array  $attributes
-     * @return array
-     */
-    public function filterIsNotNull(array $attributes)
-    {
-        $class = static::class;
-
-        return array_filter($attributes, "${class}::isNotNull");
-    }
+    abstract public static function fromId(int $id);
 
     /**
      * @return array
@@ -60,28 +45,6 @@ abstract class Transformer
     public function getAttributes()
     {
         return $this->attributes;
-    }
-
-    /**
-     * Determine if an attribute name is not blacklisted.
-     *
-     * @param  string  $attribute
-     * @return bool
-     */
-    public static function isNotBlacklisted(string $attribute): bool
-    {
-        return !in_array($attribute, static::$blacklist);
-    }
-
-    /**
-     * Determine if a value is not null.
-     *
-     * @param  mixed  $value
-     * @return bool
-     */
-    public static function isNotNull($value): bool
-    {
-        return $value !== null;
     }
 
     /**
@@ -97,12 +60,13 @@ abstract class Transformer
     /**
      * Get the transformation as JSON.
      *
+     * @param  int  $options
      * @return string
      */
-    public function toJson()
+    public function toJson($options = JSON_PRETTY_PRINT)
     {
         $data = $this->objectify();
-        $json = json_encode($data, JSON_PRETTY_PRINT);
+        $json = json_encode($data, $options);
 
         return $json;
     }

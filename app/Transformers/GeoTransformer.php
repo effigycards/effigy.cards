@@ -2,9 +2,9 @@
 
 namespace App\Transformers;
 
-use App\Adr;
+use App\Geo;
 
-class AdrTransformer extends Transformer
+class GeoTransformer extends Transformer
 {
     /**
      * Attributes that will not be in the transformation.
@@ -14,24 +14,24 @@ class AdrTransformer extends Transformer
     protected static $blacklist = ['created_at', 'id', 'updated_at'];
 
     /**
-     * CardTransformer constructor.
+     * GeoTransformer constructor.
      *
-     * @param  Adr  $adr
+     * @param  Geo  $geo
      * @return self
      */
-    public function __construct(Adr $adr)
+    public function __construct(Geo $geo)
     {
-        $this->attributes = self::filterNotNull($adr->getAttributes());
+        $this->attributes = self::filterNotNull($geo->getAttributes());
         $this->attributes = self::filterNotBlacklisted($this->attributes);
     }
 
     /**
      * @param  int  $id
-     * @return AdrTransformer
+     * @return GeoTransformer
      */
     public static function fromId(int $id)
     {
-        $card = Adr::find($id);
+        $card = Geo::find($id);
 
         return new self($card);
     }
