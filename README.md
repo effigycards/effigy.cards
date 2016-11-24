@@ -17,7 +17,7 @@ This project is a __work in progress__ and is not yet ready for production.
 That being said simply clone the repo and run the following:
 
 ```sh
-$ composer install & yarn install
+$ composer install && yarn install
 ```
 
 License
