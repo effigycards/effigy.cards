@@ -5,6 +5,8 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Whoops\Handler\JsonResponseHandler;
+use Whoops\Handler\PrettyPageHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -48,7 +50,30 @@ class Handler extends ExceptionHandler
             return self::renderJson($exception);
         }
 
+        if (config('app.debug')) {
+            return self::renderHtml($exception);
+        }
+
         return parent::render($request, $exception);
+    }
+
+    /**
+     * Render an exception into pretty HTML via Whoops.
+     *
+     * @param  \Exception  $exception
+     * @return \Illuminate\Http\Response
+     */
+    public static function renderHtml(Exception $exception)
+    {
+        $whoops = new \Whoops\Run;
+
+        $whoops->pushHandler(new PrettyPageHandler);
+
+        return response(
+            $whoops->handleException($exception),
+            $exception->getStatusCode(),
+            $exception->getHeaders()
+        );
     }
 
     /**
@@ -61,7 +86,7 @@ class Handler extends ExceptionHandler
     {
         $whoops = new \Whoops\Run;
 
-        $whoops->pushHandler(new \Whoops\Handler\JsonResponseHandler);
+        $whoops->pushHandler(new JsonResponseHandler);
 
         return response(
             $whoops->handleException($exception),
