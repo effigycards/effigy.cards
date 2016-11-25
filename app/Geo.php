@@ -23,5 +23,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Geo extends Model
 {
-    //
+    /**
+     * The attributes that should be hidden when serialized to an array or JSON.
+     *
+     * @var string[]
+     */
+    protected $hidden = ['created_at', 'id', 'updated_at'];
 }

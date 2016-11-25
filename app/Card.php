@@ -79,6 +79,20 @@ use Illuminate\Database\Eloquent\Model;
 class Card extends Model
 {
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var string[]
+     */
+    protected $appends = ['adr', 'geo'];
+
+    /**
+     * The attributes that should be hidden when serialized to an array or JSON.
+     *
+     * @var string[]
+     */
+    protected $hidden = ['adr_id', 'created_at', 'geo_id', 'id', 'updated_at'];
+
+    /**
      * Get the adr for the card.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -87,5 +101,44 @@ class Card extends Model
     {
         // All three of these args are required with `::hasOne()` for some reason...
         return $this->hasOne(Adr::class, 'id', 'adr_id');
+    }
+
+    /**
+     * Get the geo for the card.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function geo()
+    {
+        // All three of these args are required with `::hasOne()` for some reason...
+        return $this->hasOne(Geo::class, 'id', 'geo_id');
+    }
+
+    /**
+     * Get the adr for the card for serialization.
+     *
+     * @return Adr|null
+     */
+    public function getAdrAttribute()
+    {
+        if (!$this->attributes['adr_id']) {
+            return null;
+        }
+
+        return Adr::find($this->attributes['adr_id']);
+    }
+
+    /**
+     * Get the geo for the card for serialization.
+     *
+     * @return Geo|null
+     */
+    public function getGeoAttribute()
+    {
+        if (!$this->attributes['geo_id']) {
+            return null;
+        }
+
+        return Geo::find($this->attributes['geo_id']);
     }
 }
