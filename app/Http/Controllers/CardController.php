@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Card;
-use App\Transformers\CardTransformer;
 use Illuminate\Http\Request;
 
 class CardController extends Controller
@@ -52,19 +51,22 @@ class CardController extends Controller
             return self::showJson($id);
         }
 
-        return view('pages.cards.show')->with('card', Card::find($id));
+        $card = Card::find($id);
+
+        return view('pages.cards.show')->with('card', $card->toArray());
     }
 
     /**
+     * Display the specified resource as JSON.
+     *
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
     private static function showJson(int $id)
     {
-        $transformed = CardTransformer::fromId($id);
-        $attributes  = $transformed->getAttributes();
+        $card = Card::find($id);
 
-        return response()->json($attributes);
+        return response()->json($card->toArray());
     }
 
     /**
