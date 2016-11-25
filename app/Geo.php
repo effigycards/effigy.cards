@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * App\Geo
  *
@@ -21,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Geo whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Geo extends Model
+class Geo extends BaseModel
 {
     /**
      * The attributes that should be hidden when serialized to an array or JSON.

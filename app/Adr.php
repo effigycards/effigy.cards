@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * App\Adr
  *
@@ -31,7 +29,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Adr whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Adr extends Model
+class Adr extends BaseModel
 {
     /**
      * The attributes that should be hidden when serialized to an array or JSON.

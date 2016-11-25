@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * App\Card
  *
@@ -40,7 +38,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property integer $adr_id
+ * @property integer $geo_id
  * @property-read \App\Adr $adr
+ * @property-read \App\Geo $geo
  * @method static \Illuminate\Database\Query\Builder|\App\Card whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Card whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Card whereHonorificPrefix($value)
@@ -74,9 +74,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Card whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Card whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Card whereAdrId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Card whereGeoId($value)
  * @mixin \Eloquent
  */
-class Card extends Model
+class Card extends BaseModel
 {
     /**
      * The accessors to append to the model's array form.
