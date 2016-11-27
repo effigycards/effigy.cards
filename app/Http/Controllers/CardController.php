@@ -20,11 +20,15 @@ class CardController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('pages.cards.create');
+        $user = $request->user();
+        $name = $user ? $user->name : '';
+
+        return view('pages.cards.create')->with('name', $name);
     }
 
     /**
@@ -36,7 +40,8 @@ class CardController extends Controller
     public function store(Request $request)
     {
         Card::create($request->all());
-        dd($request);
+
+        return redirect('/home')->with('message', 'Card created successfully.');
     }
 
     /**

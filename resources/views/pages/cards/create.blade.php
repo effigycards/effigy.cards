@@ -12,9 +12,9 @@
                                 Create Your Card
                             </fieldset>
                             <hr>
-                            <p class="card-form__item">
-                                <label for="name">Name</label>
-                                <input id="name" name="name" type="text">
+                            <p class="card-form__item card-form__item_required">
+                                <label for="name">Name<span class="card-form__item-label_required">*</span></label>
+                                <input id="name" name="name" type="text" value="{{ $name }}" required>
                             </p>
                             <p class="card-form__item">
                                 <label for="nickname">Nickname</label>

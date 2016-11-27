@@ -6,6 +6,7 @@
 
     input {
         @include column(7/8);
+        padding: 0.5rem;
     }
 
     label {
@@ -20,6 +21,11 @@
     > label {
         text-transform: capitalize;
     }
+}
+
+.card-form__item-label_required {
+    color: tomato;
+    font-weight: bold;
 }
 
 .card-form__submit-button {
