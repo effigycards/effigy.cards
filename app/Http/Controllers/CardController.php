@@ -24,7 +24,7 @@ class CardController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.cards.create');
     }
 
     /**
@@ -35,7 +35,8 @@ class CardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Card::create($request->all());
+        dd($request);
     }
 
     /**
@@ -51,6 +52,17 @@ class CardController extends Controller
             return self::showJson($id);
         }
 
+        return self::showHtml($id);
+    }
+
+    /**
+     * Display the specified resource as HTML.
+     *
+     * @param  int  $id
+     * @return \Illuminate\View\View
+     */
+    private static function showHtml($id)
+    {
         $card = Card::find($id);
 
         return view('pages.cards.show')->with('card', $card->toArray());

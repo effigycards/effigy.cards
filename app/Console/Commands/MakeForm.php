@@ -52,7 +52,13 @@ class MakeForm extends Command
                 continue;
             }
 
-            $inputs[] = sprintf('<p><label>%s <input name="%s" type="text"></label></p>', title_case($column), $column);
+            $inputs[] = sprintf(
+                '<p><label for="%s">%s</label><input id="%s" name="%s" type="text"></p>',
+                $column,
+                title_case(str_replace('_', ' ', $column)),
+                $column,
+                $column
+            );
         }
 
         echo(implode("\n", $inputs));

@@ -87,6 +87,13 @@ class Card extends BaseModel
     protected $appends = ['adr', 'geo'];
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = ['email', 'name', 'nickname', 'tel', 'url'];
+
+    /**
      * The attributes that should be hidden when serialized to an array or JSON.
      *
      * @var string[]
