@@ -7791,6 +7791,10 @@ button.close {
   padding: 2rem;
 }
 
+.card-form__item > label {
+  text-transform: capitalize;
+}
+
 .card-form__submit-button {
   width: auto;
   max-width: 1440px;

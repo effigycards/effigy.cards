@@ -29,7 +29,7 @@
                                 <input id="url" name="url" type="text">
                             </p>
                             <p class="card-form__item">
-                                <label for="tel">Tel</label>
+                                <label for="tel">@lang('cards.tel')</label>
                                 <input id="tel" name="tel" type="tel">
                             </p>
                             <button class="card-form__submit-button" type="submit">Submit</button>
