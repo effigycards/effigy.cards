@@ -65,14 +65,16 @@ class Handler extends ExceptionHandler
      */
     public static function renderHtml(Exception $exception)
     {
-        $whoops = new \Whoops\Run;
+        $whoops   = new \Whoops\Run;
+        $handler  = new PrettyPageHandler;
+        $response = app()->make(ExceptionHandler::class)->convertExceptionToResponse($exception);
 
-        $whoops->pushHandler(new PrettyPageHandler);
+        $whoops->pushHandler($handler);
 
         return response(
             $whoops->handleException($exception),
-            $exception->getStatusCode(),
-            $exception->getHeaders()
+            $response->getStatusCode(),
+            $response->headers->all()
         );
     }
 
