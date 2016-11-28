@@ -5,22 +5,19 @@
     }
 
     input {
+        @extend .form-control;
         @include column(7/8);
-        padding: 0.5rem;
     }
 
     label {
         @include column(1/8);
         text-align: right;
+        text-transform: capitalize;
     }
 }
 
 .card-form__item {
     padding: 2rem;
-
-    > label {
-        text-transform: capitalize;
-    }
 }
 
 .card-form__item-label_required {

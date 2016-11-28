@@ -3021,7 +3021,7 @@ output {
   color: #555555;
 }
 
-.form-control {
+.form-control, .card-form input {
   display: block;
   width: 100%;
   height: 36px;
@@ -3038,38 +3038,42 @@ output {
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
-.form-control:focus {
+.form-control:focus, .card-form input:focus {
   border-color: #98cbe8;
   outline: 0;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(152, 203, 232, 0.6);
 }
 
-.form-control::-moz-placeholder {
+.form-control::-moz-placeholder, .card-form input::-moz-placeholder {
   color: #b1b7ba;
   opacity: 1;
 }
 
-.form-control:-ms-input-placeholder {
+.form-control:-ms-input-placeholder, .card-form input:-ms-input-placeholder {
   color: #b1b7ba;
 }
 
-.form-control::-webkit-input-placeholder {
+.form-control::-webkit-input-placeholder, .card-form input::-webkit-input-placeholder {
   color: #b1b7ba;
 }
 
-.form-control::-ms-expand {
+.form-control::-ms-expand, .card-form input::-ms-expand {
   border: 0;
   background-color: transparent;
 }
 
-.form-control[disabled], .form-control[readonly],
-fieldset[disabled] .form-control {
+.form-control[disabled], .card-form input[disabled], .form-control[readonly], .card-form input[readonly],
+fieldset[disabled] .form-control,
+fieldset[disabled] .card-form input, .card-form
+fieldset[disabled] input {
   background-color: #eeeeee;
   opacity: 1;
 }
 
-.form-control[disabled],
-fieldset[disabled] .form-control {
+.form-control[disabled], .card-form input[disabled],
+fieldset[disabled] .form-control,
+fieldset[disabled] .card-form input, .card-form
+fieldset[disabled] input {
   cursor: not-allowed;
 }
 
@@ -3082,19 +3086,23 @@ input[type="search"] {
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-  input[type="date"].form-control,
+  input[type="date"].form-control, .card-form input[type="date"],
   input[type="time"].form-control,
+  .card-form input[type="time"],
   input[type="datetime-local"].form-control,
-  input[type="month"].form-control {
+  .card-form input[type="datetime-local"],
+  input[type="month"].form-control,
+  .card-form input[type="month"] {
     line-height: 36px;
   }
-  input[type="date"].input-sm, .input-group-sm > input[type="date"].form-control,
+  input[type="date"].input-sm, .input-group-sm > input[type="date"].form-control, .card-form .input-group-sm > input[type="date"],
   .input-group-sm > input[type="date"].input-group-addon,
   .input-group-sm > .input-group-btn > input[type="date"].btn,
   .input-group-sm > .input-group-btn > input[type="date"].card-form__submit-button,
   .input-group-sm input[type="date"],
   input[type="time"].input-sm,
   .input-group-sm > input[type="time"].form-control,
+  .card-form .input-group-sm > input[type="time"],
   .input-group-sm > input[type="time"].input-group-addon,
   .input-group-sm > .input-group-btn > input[type="time"].btn,
   .input-group-sm > .input-group-btn > input[type="time"].card-form__submit-button,
@@ -3102,6 +3110,7 @@ input[type="search"] {
   input[type="time"],
   input[type="datetime-local"].input-sm,
   .input-group-sm > input[type="datetime-local"].form-control,
+  .card-form .input-group-sm > input[type="datetime-local"],
   .input-group-sm > input[type="datetime-local"].input-group-addon,
   .input-group-sm > .input-group-btn > input[type="datetime-local"].btn,
   .input-group-sm > .input-group-btn > input[type="datetime-local"].card-form__submit-button,
@@ -3109,6 +3118,7 @@ input[type="search"] {
   input[type="datetime-local"],
   input[type="month"].input-sm,
   .input-group-sm > input[type="month"].form-control,
+  .card-form .input-group-sm > input[type="month"],
   .input-group-sm > input[type="month"].input-group-addon,
   .input-group-sm > .input-group-btn > input[type="month"].btn,
   .input-group-sm > .input-group-btn > input[type="month"].card-form__submit-button,
@@ -3116,13 +3126,14 @@ input[type="search"] {
   input[type="month"] {
     line-height: 30px;
   }
-  input[type="date"].input-lg, .input-group-lg > input[type="date"].form-control,
+  input[type="date"].input-lg, .input-group-lg > input[type="date"].form-control, .card-form .input-group-lg > input[type="date"],
   .input-group-lg > input[type="date"].input-group-addon,
   .input-group-lg > .input-group-btn > input[type="date"].btn,
   .input-group-lg > .input-group-btn > input[type="date"].card-form__submit-button,
   .input-group-lg input[type="date"],
   input[type="time"].input-lg,
   .input-group-lg > input[type="time"].form-control,
+  .card-form .input-group-lg > input[type="time"],
   .input-group-lg > input[type="time"].input-group-addon,
   .input-group-lg > .input-group-btn > input[type="time"].btn,
   .input-group-lg > .input-group-btn > input[type="time"].card-form__submit-button,
@@ -3130,6 +3141,7 @@ input[type="search"] {
   input[type="time"],
   input[type="datetime-local"].input-lg,
   .input-group-lg > input[type="datetime-local"].form-control,
+  .card-form .input-group-lg > input[type="datetime-local"],
   .input-group-lg > input[type="datetime-local"].input-group-addon,
   .input-group-lg > .input-group-btn > input[type="datetime-local"].btn,
   .input-group-lg > .input-group-btn > input[type="datetime-local"].card-form__submit-button,
@@ -3137,6 +3149,7 @@ input[type="search"] {
   input[type="datetime-local"],
   input[type="month"].input-lg,
   .input-group-lg > input[type="month"].form-control,
+  .card-form .input-group-lg > input[type="month"],
   .input-group-lg > input[type="month"].input-group-addon,
   .input-group-lg > .input-group-btn > input[type="month"].btn,
   .input-group-lg > .input-group-btn > input[type="month"].card-form__submit-button,
@@ -3230,10 +3243,10 @@ fieldset[disabled]
   min-height: 36px;
 }
 
-.form-control-static.input-lg, .input-group-lg > .form-control-static.form-control,
+.form-control-static.input-lg, .input-group-lg > .form-control-static.form-control, .card-form .input-group-lg > input.form-control-static,
 .input-group-lg > .form-control-static.input-group-addon,
 .input-group-lg > .input-group-btn > .form-control-static.btn,
-.input-group-lg > .input-group-btn > .form-control-static.card-form__submit-button, .form-control-static.input-sm, .input-group-sm > .form-control-static.form-control,
+.input-group-lg > .input-group-btn > .form-control-static.card-form__submit-button, .form-control-static.input-sm, .input-group-sm > .form-control-static.form-control, .card-form .input-group-sm > input.form-control-static,
 .input-group-sm > .form-control-static.input-group-addon,
 .input-group-sm > .input-group-btn > .form-control-static.btn,
 .input-group-sm > .input-group-btn > .form-control-static.card-form__submit-button {
@@ -3241,7 +3254,7 @@ fieldset[disabled]
   padding-right: 0;
 }
 
-.input-sm, .input-group-sm > .form-control,
+.input-sm, .input-group-sm > .form-control, .card-form .input-group-sm > input,
 .input-group-sm > .input-group-addon,
 .input-group-sm > .input-group-btn > .btn,
 .input-group-sm > .input-group-btn > .card-form__submit-button {
@@ -3272,7 +3285,7 @@ select[multiple].input-sm,
   height: auto;
 }
 
-.form-group-sm .form-control {
+.form-group-sm .form-control, .form-group-sm .card-form input, .card-form .form-group-sm input {
   height: 30px;
   padding: 5px 10px;
   font-size: 12px;
@@ -3298,7 +3311,7 @@ select[multiple].input-sm,
   line-height: 1.5;
 }
 
-.input-lg, .input-group-lg > .form-control,
+.input-lg, .input-group-lg > .form-control, .card-form .input-group-lg > input,
 .input-group-lg > .input-group-addon,
 .input-group-lg > .input-group-btn > .btn,
 .input-group-lg > .input-group-btn > .card-form__submit-button {
@@ -3329,7 +3342,7 @@ select[multiple].input-lg,
   height: auto;
 }
 
-.form-group-lg .form-control {
+.form-group-lg .form-control, .form-group-lg .card-form input, .card-form .form-group-lg input {
   height: 46px;
   padding: 10px 16px;
   font-size: 18px;
@@ -3359,7 +3372,7 @@ select[multiple].input-lg,
   position: relative;
 }
 
-.has-feedback .form-control {
+.has-feedback .form-control, .has-feedback .card-form input, .card-form .has-feedback input {
   padding-right: 45px;
 }
 
@@ -3376,23 +3389,27 @@ select[multiple].input-lg,
   pointer-events: none;
 }
 
-.input-lg + .form-control-feedback, .input-group-lg > .form-control + .form-control-feedback,
+.input-lg + .form-control-feedback, .input-group-lg > .form-control + .form-control-feedback, .card-form .input-group-lg > input + .form-control-feedback,
 .input-group-lg > .input-group-addon + .form-control-feedback,
 .input-group-lg > .input-group-btn > .btn + .form-control-feedback,
 .input-group-lg > .input-group-btn > .card-form__submit-button + .form-control-feedback,
 .input-group-lg + .form-control-feedback,
-.form-group-lg .form-control + .form-control-feedback {
+.form-group-lg .form-control + .form-control-feedback,
+.form-group-lg .card-form input + .form-control-feedback, .card-form
+.form-group-lg input + .form-control-feedback {
   width: 46px;
   height: 46px;
   line-height: 46px;
 }
 
-.input-sm + .form-control-feedback, .input-group-sm > .form-control + .form-control-feedback,
+.input-sm + .form-control-feedback, .input-group-sm > .form-control + .form-control-feedback, .card-form .input-group-sm > input + .form-control-feedback,
 .input-group-sm > .input-group-addon + .form-control-feedback,
 .input-group-sm > .input-group-btn > .btn + .form-control-feedback,
 .input-group-sm > .input-group-btn > .card-form__submit-button + .form-control-feedback,
 .input-group-sm + .form-control-feedback,
-.form-group-sm .form-control + .form-control-feedback {
+.form-group-sm .form-control + .form-control-feedback,
+.form-group-sm .card-form input + .form-control-feedback, .card-form
+.form-group-sm input + .form-control-feedback {
   width: 30px;
   height: 30px;
   line-height: 30px;
@@ -3411,12 +3428,12 @@ select[multiple].input-lg,
   color: #3c763d;
 }
 
-.has-success .form-control {
+.has-success .form-control, .has-success .card-form input, .card-form .has-success input {
   border-color: #3c763d;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
-.has-success .form-control:focus {
+.has-success .form-control:focus, .has-success .card-form input:focus, .card-form .has-success input:focus {
   border-color: #2b542c;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;
 }
@@ -3444,12 +3461,12 @@ select[multiple].input-lg,
   color: #8a6d3b;
 }
 
-.has-warning .form-control {
+.has-warning .form-control, .has-warning .card-form input, .card-form .has-warning input {
   border-color: #8a6d3b;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
-.has-warning .form-control:focus {
+.has-warning .form-control:focus, .has-warning .card-form input:focus, .card-form .has-warning input:focus {
   border-color: #66512c;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;
 }
@@ -3477,12 +3494,12 @@ select[multiple].input-lg,
   color: #a94442;
 }
 
-.has-error .form-control {
+.has-error .form-control, .has-error .card-form input, .card-form .has-error input {
   border-color: #a94442;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
-.has-error .form-control:focus {
+.has-error .form-control:focus, .has-error .card-form input:focus, .card-form .has-error input:focus {
   border-color: #843534;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
 }
@@ -3518,7 +3535,7 @@ select[multiple].input-lg,
     margin-bottom: 0;
     vertical-align: middle;
   }
-  .form-inline .form-control {
+  .form-inline .form-control, .form-inline .card-form input, .card-form .form-inline input {
     display: inline-block;
     width: auto;
     vertical-align: middle;
@@ -3532,10 +3549,12 @@ select[multiple].input-lg,
   }
   .form-inline .input-group .input-group-addon,
   .form-inline .input-group .input-group-btn,
-  .form-inline .input-group .form-control {
+  .form-inline .input-group .form-control,
+  .form-inline .input-group .card-form input, .card-form
+  .form-inline .input-group input {
     width: auto;
   }
-  .form-inline .input-group > .form-control {
+  .form-inline .input-group > .form-control, .form-inline .card-form .input-group > input, .card-form .form-inline .input-group > input {
     width: 100%;
   }
   .form-inline .control-label {
@@ -4494,7 +4513,7 @@ tbody.collapse.in {
   padding-right: 0;
 }
 
-.input-group .form-control {
+.input-group .form-control, .input-group .card-form input, .card-form .input-group input {
   position: relative;
   z-index: 2;
   float: left;
@@ -4502,19 +4521,23 @@ tbody.collapse.in {
   margin-bottom: 0;
 }
 
-.input-group .form-control:focus {
+.input-group .form-control:focus, .input-group .card-form input:focus, .card-form .input-group input:focus {
   z-index: 3;
 }
 
 .input-group-addon,
 .input-group-btn,
-.input-group .form-control {
+.input-group .form-control,
+.input-group .card-form input, .card-form
+.input-group input {
   display: table-cell;
 }
 
 .input-group-addon:not(:first-child):not(:last-child),
 .input-group-btn:not(:first-child):not(:last-child),
-.input-group .form-control:not(:first-child):not(:last-child) {
+.input-group .form-control:not(:first-child):not(:last-child),
+.input-group .card-form input:not(:first-child):not(:last-child), .card-form
+.input-group input:not(:first-child):not(:last-child) {
   border-radius: 0;
 }
 
@@ -4537,7 +4560,7 @@ tbody.collapse.in {
   border-radius: 4px;
 }
 
-.input-group-addon.input-sm,
+.input-group-addon.input-sm, .card-form .input-group-sm > input.input-group-addon,
 .input-group-sm > .input-group-addon,
 .input-group-sm > .input-group-btn > .input-group-addon.btn,
 .input-group-sm > .input-group-btn > .input-group-addon.card-form__submit-button {
@@ -4546,7 +4569,7 @@ tbody.collapse.in {
   border-radius: 3px;
 }
 
-.input-group-addon.input-lg,
+.input-group-addon.input-lg, .card-form .input-group-lg > input.input-group-addon,
 .input-group-lg > .input-group-addon,
 .input-group-lg > .input-group-btn > .input-group-addon.btn,
 .input-group-lg > .input-group-btn > .input-group-addon.card-form__submit-button {
@@ -4560,7 +4583,7 @@ tbody.collapse.in {
   margin-top: 0;
 }
 
-.input-group .form-control:first-child,
+.input-group .form-control:first-child, .input-group .card-form input:first-child, .card-form .input-group input:first-child,
 .input-group-addon:first-child,
 .input-group-btn:first-child > .btn,
 .input-group-btn:first-child > .card-form__submit-button,
@@ -4579,7 +4602,7 @@ tbody.collapse.in {
   border-right: 0;
 }
 
-.input-group .form-control:last-child,
+.input-group .form-control:last-child, .input-group .card-form input:last-child, .card-form .input-group input:last-child,
 .input-group-addon:last-child,
 .input-group-btn:last-child > .btn,
 .input-group-btn:last-child > .card-form__submit-button,
@@ -5077,7 +5100,7 @@ tbody.collapse.in {
     margin-bottom: 0;
     vertical-align: middle;
   }
-  .navbar-form .form-control {
+  .navbar-form .form-control, .navbar-form .card-form input, .card-form .navbar-form input {
     display: inline-block;
     width: auto;
     vertical-align: middle;
@@ -5091,10 +5114,12 @@ tbody.collapse.in {
   }
   .navbar-form .input-group .input-group-addon,
   .navbar-form .input-group .input-group-btn,
-  .navbar-form .input-group .form-control {
+  .navbar-form .input-group .form-control,
+  .navbar-form .input-group .card-form input, .card-form
+  .navbar-form .input-group input {
     width: auto;
   }
-  .navbar-form .input-group > .form-control {
+  .navbar-form .input-group > .form-control, .navbar-form .card-form .input-group > input, .card-form .navbar-form .input-group > input {
     width: 100%;
   }
   .navbar-form .control-label {
@@ -7755,7 +7780,6 @@ button.close {
   width: 87.125%;
   margin-left: 0%;
   margin-right: 3%;
-  padding: 0.5rem;
 }
 
 .card-form input::after {
@@ -7776,6 +7800,7 @@ button.close {
   margin-left: 0%;
   margin-right: 3%;
   text-align: right;
+  text-transform: capitalize;
 }
 
 .card-form label::after {
@@ -7790,10 +7815,6 @@ button.close {
 
 .card-form__item {
   padding: 2rem;
-}
-
-.card-form__item > label {
-  text-transform: capitalize;
 }
 
 .card-form__item-label_required {

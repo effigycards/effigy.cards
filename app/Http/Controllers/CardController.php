@@ -25,10 +25,11 @@ class CardController extends Controller
      */
     public function create(Request $request)
     {
-        $user = $request->user();
-        $name = $user ? $user->name : '';
+        $user  = $request->user();
+        $email = $user ? $user->email : '';
+        $name  = $user ? $user->name : '';
 
-        return view('pages.cards.create')->with('name', $name);
+        return view('pages.cards.create', compact('email', 'name'));
     }
 
     /**
