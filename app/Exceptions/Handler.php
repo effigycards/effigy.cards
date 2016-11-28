@@ -86,14 +86,15 @@ class Handler extends ExceptionHandler
      */
     public static function renderJson(Exception $exception)
     {
-        $whoops = new \Whoops\Run;
+        $whoops   = new \Whoops\Run;
+        $response = app()->make(ExceptionHandler::class)->convertExceptionToResponse($exception);
 
         $whoops->pushHandler(new JsonResponseHandler);
 
         return response(
             $whoops->handleException($exception),
-            $exception->getStatusCode(),
-            $exception->getHeaders()
+            $response->getStatusCode(),
+            $response->headers->all()
         );
     }
 
