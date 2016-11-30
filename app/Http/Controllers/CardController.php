@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Card;
+use App\Http\Controllers\Traits\ShowsCard;
 use Illuminate\Http\Request;
 
 class CardController extends Controller
 {
+    use ShowsCard;
+
     /**
      * Display a listing of the resource.
      *
@@ -59,32 +62,6 @@ class CardController extends Controller
         }
 
         return self::showHtml($id);
-    }
-
-    /**
-     * Display the specified resource as HTML.
-     *
-     * @param  int  $id
-     * @return \Illuminate\View\View
-     */
-    private static function showHtml($id)
-    {
-        $card = Card::find($id);
-
-        return view('pages.cards.show')->with('card', $card->toArray());
-    }
-
-    /**
-     * Display the specified resource as JSON.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    private static function showJson(int $id)
-    {
-        $card = Card::find($id);
-
-        return response()->json($card->toArray());
     }
 
     /**
