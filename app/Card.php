@@ -129,7 +129,7 @@ class Card extends BaseModel
      */
     public function getAdrAttribute()
     {
-        if (!$this->attributes['adr_id']) {
+        if (!isset($this->attributes['adr_id'])) {
             return null;
         }
 
@@ -143,7 +143,7 @@ class Card extends BaseModel
      */
     public function getGeoAttribute()
     {
-        if (!$this->attributes['geo_id']) {
+        if (!isset($this->attributes['geo_id'])) {
             return null;
         }
 
