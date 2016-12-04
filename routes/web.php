@@ -17,9 +17,7 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index');
 
-Route::resource('adrs', 'AdrController');
-
-Route::resource('cards', 'CardController');
+Route::resource('users', 'UserController');
 
 /**
  * The following routes are extracted and some modified from `Auth::routes()`
