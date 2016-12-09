@@ -2,14 +2,15 @@
 
 namespace App;
 
-use App\Traits\NotNullable;
+use App\Traits\GetsGeo;
+use App\Traits\NotNullOrEmpty;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * App\User
  *
- * @property integer $id
+ * @property int $id
  * @property string $name
  * @property string $email
  * @property string $password
@@ -54,7 +55,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $latitude
  * @property string $longitude
  * @property string $altitude
- * @property-read mixed $adr
+ * @property-read array $adr
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $readNotifications
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $unreadNotifications
@@ -107,7 +108,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
-    use Notifiable, NotNullable;
+    use GetsGeo, Notifiable, NotNullOrEmpty;
 
     /**
      * The accessors to append to the model's array form.
@@ -131,7 +132,22 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'created_at', 'id', 'password', 'remember_token', 'updated_at'
+        'altitude',
+        'country_name',
+        'created_at',
+        'extended_address',
+        'id',
+        'label',
+        'latitude',
+        'locality',
+        'longitude',
+        'password',
+        'postal_code',
+        'post_office_box',
+        'region',
+        'remember_token',
+        'street_address',
+        'updated_at'
     ];
 
     /**
@@ -159,28 +175,7 @@ class User extends Authenticatable
             $adr[$property] = $this->attributes[$property];
         }
 
-        return static::filterNotNull($adr);
-    }
-
-    /**
-     * Get an array instance of the geo class for serialization.
-     *
-     * @return array
-     */
-    private function getGeo()
-    {
-        $geo        = [];
-        $properties = [
-            'latitude',
-            'longitude',
-            'altitude'
-        ];
-
-        foreach ($properties as $property) {
-            $geo[$property] = $this->attributes[$property];
-        }
-
-        return static::filterNotNull($geo);
+        return static::filterNotNullOrEmpty($adr);
     }
 
     /**
@@ -192,6 +187,6 @@ class User extends Authenticatable
     {
         $attributes = parent::toArray();
 
-        return static::filterNotNull($attributes);
+        return static::filterNotNullOrEmpty($attributes);
     }
 }
