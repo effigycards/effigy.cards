@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\NotNullable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -53,8 +54,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $latitude
  * @property string $longitude
  * @property string $altitude
- * @property integer $card_id
- * @property-read \App\Card $card
+ * @property-read mixed $adr
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $readNotifications
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $unreadNotifications
@@ -103,12 +103,18 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Query\Builder|\App\User whereLatitude($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereLongitude($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereAltitude($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereCardId($value)
  * @mixin \Eloquent
  */
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, NotNullable;
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var string[]
+     */
+    protected $appends = ['adr'];
 
     /**
      * The attributes that are mass assignable.
@@ -125,17 +131,67 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'created_at', 'id', 'password', 'remember_token', 'updated_at'
     ];
 
     /**
-     * Get the card for the user.
+     * Get the adr for the card for serialization.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return array
      */
-    public function card()
+    public function getAdrAttribute()
     {
-        // All three of these args are required with `::hasOne()` for some reason...
-        return $this->hasOne(Card::class, 'id', 'card_id');
+        $adr        = [];
+        $properties = [
+            'country_name',
+            'extended_address',
+            'label',
+            'locality',
+            'postal_code',
+            'post_office_box',
+            'region',
+            'street_address'
+        ];
+
+        $adr['geo'] = $this->getGeo();
+
+        foreach ($properties as $property) {
+            $adr[$property] = $this->attributes[$property];
+        }
+
+        return static::filterNotNull($adr);
+    }
+
+    /**
+     * Get an array instance of the geo class for serialization.
+     *
+     * @return array
+     */
+    private function getGeo()
+    {
+        $geo        = [];
+        $properties = [
+            'latitude',
+            'longitude',
+            'altitude'
+        ];
+
+        foreach ($properties as $property) {
+            $geo[$property] = $this->attributes[$property];
+        }
+
+        return static::filterNotNull($geo);
+    }
+
+    /**
+     * Convert the model instance to an array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $attributes = parent::toArray();
+
+        return static::filterNotNull($attributes);
     }
 }
