@@ -17,6 +17,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $remember_token
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property string $deleted_at
  * @property string $honorific_prefix
  * @property string $given_name
  * @property string $additional_name
@@ -66,6 +67,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Query\Builder|\App\User whereRememberToken($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereDeletedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereHonorificPrefix($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereGivenName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereAdditionalName($value)

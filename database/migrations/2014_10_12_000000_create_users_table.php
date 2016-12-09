@@ -22,6 +22,9 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
 
+            // Enable soft deletions.
+            $table->softDeletes();
+
             // Card properties.
             $table->string('honorific_prefix')->nullable();
             $table->string('given_name')->nullable();
