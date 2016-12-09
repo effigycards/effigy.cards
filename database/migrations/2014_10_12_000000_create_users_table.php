@@ -36,7 +36,7 @@ class CreateUsersTable extends Migration
             $table->string('uid')->nullable();
             $table->string('category')->nullable();
             $table->string('tel')->nullable();
-            $table->string('note')->nullable();
+            $table->text('note')->nullable();
             $table->date('bday')->nullable();
             $table->string('key')->nullable();
             $table->string('org')->nullable();
