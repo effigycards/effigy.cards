@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Traits\CreatesUser;
-use App\Http\Controllers\Traits\ShowsUser;
+use App\Http\Controllers\Traits\ShowsUserCard;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Foundation\Auth\User;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    use CreatesUser, RedirectsUsers, ShowsUser;
+    use CreatesUser, RedirectsUsers, ShowsUserCard;
 
     /**
      * Display a listing of the resource.

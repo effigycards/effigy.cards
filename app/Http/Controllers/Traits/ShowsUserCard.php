@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Traits;
 
 use App\User;
 
-trait ShowsUser
+trait ShowsUserCard
 {
     /**
      * Display the specified resource as HTML.
@@ -14,7 +14,7 @@ trait ShowsUser
      */
     private static function showHtml($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
         return view('pages.cards.show')->with('card', $user->toArray());
     }
@@ -27,7 +27,7 @@ trait ShowsUser
      */
     private static function showJson(int $id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
         return response()->json($user->toArray());
     }
