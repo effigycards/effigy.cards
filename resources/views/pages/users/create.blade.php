@@ -10,6 +10,7 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('users.store') }}">
                         {{ csrf_field() }}
 
+                        {{-- Name --}}
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>
 
@@ -24,6 +25,7 @@
                             </div>
                         </div>
 
+                        {{-- Email --}}
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
@@ -38,6 +40,7 @@
                             </div>
                         </div>
 
+                        {{-- Password --}}
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 
@@ -52,11 +55,21 @@
                             </div>
                         </div>
 
+                        {{-- Password Confirm --}}
                         <div class="form-group">
                             <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            </div>
+                        </div>
+
+                        {{-- URL --}}
+                        <div class="form-group">
+                            <label for="url" class="col-md-4 control-label">URL</label>
+
+                            <div class="col-md-6">
+                                <input id="url" type="url" class="form-control" name="url">
                             </div>
                         </div>
 
