@@ -28,7 +28,10 @@ trait ShowsUserCard
     private static function showJson(int $id)
     {
         $user = User::findOrFail($id);
+        $card = $user->toArray();
 
-        return response()->json($user->toArray());
+        $card['type'] = 'card';
+
+        return response()->json($card);
     }
 }
