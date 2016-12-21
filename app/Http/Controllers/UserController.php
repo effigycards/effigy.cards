@@ -62,11 +62,16 @@ class UserController extends Controller
      */
     public function show(Request $request, int $id)
     {
-        if ($request->wantsJson()) {
-            return self::showJson($id);
-        }
+        /**
+         * @todo Reinstate the following logic once we get past the JSON MVP view stage.
+         */
+        //-- if ($request->wantsJson()) {
+        //--     return self::showJson($id);
+        //-- }
 
-        return self::showHtml($id);
+        //-- return self::showHtml($id);
+
+        return self::showJson($id);
     }
 
     /**
