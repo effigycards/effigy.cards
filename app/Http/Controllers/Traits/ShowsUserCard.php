@@ -16,7 +16,7 @@ trait ShowsUserCard
     {
         $user = User::findOrFail($id);
 
-        return view('pages.cards.show')->with('card', $user->toArray());
+        return view('pages.users.show')->with('card', $user->toArray());
     }
 
     /**
