@@ -188,7 +188,18 @@ class User extends Authenticatable
     public function toArray()
     {
         $attributes = parent::toArray();
+        $attributes = static::filterNotNullOrEmpty($attributes);
 
-        return static::filterNotNullOrEmpty($attributes);
+        // Remove the user->adr->geo key if it's an empty array.
+        if (!$attributes['adr']['geo']) {
+            unset($attributes['adr']['geo']);
+        }
+
+        // Remove the user->adr key if it's an empty array.
+        if (!$attributes['adr']) {
+            unset($attributes['adr']);
+        }
+
+        return $attributes;
     }
 }
