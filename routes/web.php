@@ -30,8 +30,8 @@ Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 // Registration Routes...
-Route::get('registrations/create', 'RegistrationController@create')->name('registrations.create');
-Route::post('registrations/store', 'RegistrationController@store')->name('registrations.store');
+# Route::get('registrations/create', 'RegistrationController@create')->name('registrations.create');
+# Route::post('registrations/store', 'RegistrationController@store')->name('registrations.store');
 
 // Password Reset Routes...
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');

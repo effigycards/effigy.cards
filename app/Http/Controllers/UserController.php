@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Traits\CreatesUser;
 use App\Http\Controllers\Traits\ShowsUserCard;
+use App\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RedirectsUsers;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -77,12 +77,14 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $user = $request->user();
+
+        return view('pages.users.edit')->with('user', $user);
     }
 
     /**
@@ -94,7 +96,10 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        //dd($request->all());
+        $user->update($request->all());
+        $user->saveOrFail();
     }
 
     /**
