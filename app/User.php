@@ -122,16 +122,33 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var string[]
      */
     protected $fillable = [
-        'name', 'email', 'honorific_prefix', 'honorific_suffix', 'password', 'url'
+        'anniversary',
+        'bday',
+        'category',
+        'email',
+        'gender_identity',
+        'honorific_prefix',
+        'honorific_suffix',
+        'impp',
+        'job_title',
+        'key',
+        'name',
+        'nickname',
+        'password',
+        'role',
+        'tel',
+        'sex',
+        'uid',
+        'url'
     ];
 
     /**
      * The attributes that should be hidden for arrays.
      *
-     * @var array
+     * @var string[]
      */
     protected $hidden = [
         'altitude',
