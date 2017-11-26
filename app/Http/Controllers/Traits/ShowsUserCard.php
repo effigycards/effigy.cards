@@ -20,6 +20,16 @@ trait ShowsUserCard
     }
 
     /**
+     * Convert underscores in a property to hyphens.
+     *
+     * @param string $property
+     * @return string
+     */
+    private static function dashify(string $property): string {
+        return str_replace('_', '-', $property);
+    }
+
+    /**
      * Display the specified resource as JSON.
      *
      * @param  int  $id
@@ -27,11 +37,14 @@ trait ShowsUserCard
      */
     private static function showJson(int $id)
     {
-        $user = User::findOrFail($id);
-        $card = $user->toArray();
+        $user = collect(User::findOrFail($id));
 
-        $card['type'] = 'card';
+        $user->put('type', 'card');
 
-        return response()->json($card);
+        $user = $user->mapWithKeys(function ($value, $property) {
+            return [self::dashify($property) => $value];
+        });
+
+        return response()->json($user)->setJsonOptions(JSON_PRETTY_PRINT);
     }
 }
