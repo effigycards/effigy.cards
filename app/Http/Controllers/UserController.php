@@ -71,6 +71,10 @@ class UserController extends Controller
 
         //-- return self::showHtml($id);
 
+        /**
+         * @todo Set the content-type to: application/jf2+json
+         */
+
         return self::showJson($id);
     }
 
